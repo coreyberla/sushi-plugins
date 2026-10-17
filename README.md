@@ -26,6 +26,13 @@ directory instead:
 
 ## Plugins
 
+### csv
+
+Shows CSV and TSV files as a table, with the first row as column headers.
+Click a header to sort by that column; numbers sort numerically. The
+delimiter (comma, semicolon, tab or pipe) is detected from the first line.
+Only the first 8 MB or 50,000 rows are shown.
+
 ### epub
 
 Shows an EPUB's cover, title, authors, series, publisher, date, language and
