@@ -1,0 +1,122 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $SushiPluginEpubRenderer: Adw.Bin {
+  ScrolledWindow {
+    hscrollbar-policy: never;
+    propagate-natural-height: true;
+    // Grow the window with the content, but scroll long descriptions
+    max-content-height: 720;
+
+    Adw.Clamp {
+      maximum-size: 400;
+
+      Box {
+        orientation: vertical;
+        spacing: 24;
+        margin-top: 24;
+        margin-bottom: 24;
+        margin-start: 12;
+        margin-end: 12;
+
+        Box {
+          orientation: vertical;
+          spacing: 6;
+
+          Image coverImage {
+            halign: center;
+            valign: center;
+            margin-bottom: 12;
+            pixel-size: 192;
+            paintable: Adw.SpinnerPaintable {};
+          }
+
+          Label titleLabel {
+            wrap: true;
+            wrap-mode: word_char;
+            justify: center;
+
+            styles [
+              "title-2",
+            ]
+          }
+
+          Label authorLabel {
+            visible: false;
+            wrap: true;
+            justify: center;
+
+            styles [
+              "heading",
+            ]
+          }
+
+          Label seriesLabel {
+            visible: false;
+            wrap: true;
+            justify: center;
+
+            styles [
+              "description",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ActionRow publisherRow {
+            title: _("Publisher");
+            visible: false;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow dateRow {
+            title: _("Published");
+            visible: false;
+
+            styles [
+              "property",
+              "numeric",
+            ]
+          }
+
+          Adw.ActionRow languageRow {
+            title: _("Language");
+            visible: false;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow sizeRow {
+            title: _("Size");
+            visible: false;
+            subtitle-lines: 1;
+
+            styles [
+              "property",
+              "numeric",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup descriptionGroup {
+          title: _("Description");
+          visible: false;
+
+          Label descriptionLabel {
+            wrap: true;
+            xalign: 0;
+
+            styles [
+              "body",
+            ]
+          }
+        }
+      }
+    }
+  }
+}
