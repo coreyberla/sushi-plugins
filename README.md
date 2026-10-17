@@ -28,3 +28,12 @@ directory instead:
 Shows an EPUB's cover, title, authors, series, publisher, date, language and
 description. Uses a small built-in zip reader (`Gio.ZlibDecompressor`), so it
 needs no libraries beyond what sushi already uses.
+
+### structured
+
+Shows structured data as a collapsible tree, with a toggle to the raw text.
+Keys stay in file order and numbers show exactly as written. Files that don't
+parse open as text, with the error shown and the cursor on it.
+
+Currently supports JSON and all its subtypes (GeoJSON, JSON-LD, Jupyter
+notebooks, …). Files over 8 MB only get the text view.

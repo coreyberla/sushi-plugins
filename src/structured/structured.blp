@@ -1,0 +1,114 @@
+using Gtk 4.0;
+using Adw 1;
+using GtkSource 5;
+
+template $SushiPluginStructuredRenderer: Adw.Bin {
+  child: Box {
+    orientation: vertical;
+
+    Adw.Banner banner {
+      use-markup: false;
+    }
+
+    Stack stack {
+      vexpand: true;
+      transition-type: crossfade;
+      // Don't measure the hidden page, laying out a big text buffer is slow
+      hhomogeneous: false;
+      vhomogeneous: false;
+
+      StackPage {
+        name: "tree";
+
+        child: ScrolledWindow {
+          child: ListView treeView {
+            activate => $_onRowActivated();
+
+            ShortcutController {
+              Shortcut {
+                trigger: "<Ctrl>c";
+                action: "action(structured.copy-value)";
+              }
+
+              Shortcut {
+                trigger: "<Ctrl><Shift>c";
+                action: "action(structured.copy-path)";
+              }
+            }
+          };
+        };
+      }
+
+      StackPage {
+        name: "text";
+
+        child: ScrolledWindow {
+          child: GtkSource.View textView {
+            editable: false;
+            cursor-visible: false;
+            monospace: true;
+            show-line-numbers: true;
+            left-margin: 12;
+            right-margin: 12;
+            top-margin: 12;
+            bottom-margin: 12;
+            wrap-mode: word_char;
+          };
+        };
+      }
+    }
+  };
+}
+
+Box toolbar {
+  halign: end;
+  valign: end;
+  spacing: 6;
+
+  styles [
+    "osd",
+    "pill-osd",
+  ]
+
+  Button expandButton {
+    clicked => $_onExpandClicked();
+
+    styles [
+      "flat",
+    ]
+  }
+
+  Adw.ToggleGroup viewToggle {
+    active-name: "tree";
+
+    styles [
+      "flat",
+    ]
+
+    Adw.Toggle {
+      name: "tree";
+      label: _("Tree");
+    }
+
+    Adw.Toggle {
+      name: "text";
+      label: _("Text");
+    }
+  }
+}
+
+menu rowMenu {
+  section {
+    item {
+      label: _("Copy Value");
+      action: "structured.copy-value";
+      accel: "<Ctrl>c";
+    }
+
+    item {
+      label: _("Copy Path");
+      action: "structured.copy-path";
+      accel: "<Ctrl><Shift>c";
+    }
+  }
+}
