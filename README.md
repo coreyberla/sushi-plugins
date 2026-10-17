@@ -2,6 +2,9 @@
 
 Pure GJS plugins for [Sushi](https://gitlab.gnome.org/GNOME/sushi), the GNOME Files previewer.
 
+> [!WARNING]
+> These plugins are not thoroughly tested. Use them at your own risk.
+
 ## Install
 
 ```sh
