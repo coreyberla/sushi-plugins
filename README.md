@@ -26,6 +26,15 @@ directory instead:
 
 ## Plugins
 
+### certificate
+
+Shows X.509 certificates: subject, issuer, validity, and every field and
+extension, including SHA-256 fingerprints. Reads PEM, DER and PKCS#7 files;
+files with several certificates (chains, CA bundles) get a picker. Parsing uses
+[Gcr](https://gitlab.gnome.org/GNOME/gcr) 4, so it needs its typelib
+(`Gcr-4.typelib`). Encrypted files such as PKCS#12 aren't supported, since sushi
+can't ask for a password.
+
 ### csv
 
 Shows CSV and TSV files as a table, with the first row as column headers.
